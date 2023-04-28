@@ -1,16 +1,16 @@
 import os
+import subprocess
 
 # get the current path
 CURRENT_PATH = os.getcwd()
 
 
-def ligandPrearation():
+def ligandPreparation():
     # Check if the Ligand folder exists
     if not os.path.exists(os.path.join(CURRENT_PATH, 'INPUTS', 'Ligand')):
         # raise an error if the folder does not exist
-
         raise Exception(
-            'Ligand folder does not exist. PLease create a "Ligand" folder in the current directory then add your ligands to it.')
+            'Ligand folder does not exist. Please create a "Ligand" folder in the current directory then add your ligands to it.')
     else:
         # check if Ligands folder contains ligand
         if len(os.listdir(os.path.join(CURRENT_PATH, 'INPUTS', 'Ligand'))) == 0:
@@ -31,9 +31,9 @@ def ligandPrearation():
                     output_path = os.path.join(
                         CURRENT_PATH, 'OUTPUTS', 'Ligand_prepared', f"{ligand[:-4]}_H_charged.pdbqt")
                     # run obabel from the command line to add hydrogen and charge to the ligand
-                    os.system(
-                        f"obabel -isdf {ligand_path} -O {output_path} -h -p -r")
+                    subprocess.run(
+                        ['obabel', '-isdf', ligand_path, '-O', output_path, '-h', '-p', '-r'])
 
 
 if __name__ == "__main__":
-    ligandPrearation()
+    ligandPreparation()
