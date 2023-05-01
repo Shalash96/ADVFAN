@@ -47,20 +47,23 @@ def vinaBoxCreation():
     pattern = r'gridcenter\s+([\d.-]+)\s+([\d.-]+)\s+([\d.-]+)'
     matches = re.findall(pattern, text)
 
-    # Print the extracted xyz-coordinates
+    # extracte the xyz-coordinates
     for match in matches:
         center_x = match[0]
         center_y = match[1]
         center_z = match[2]
 
     # write the extracted xyz-coordinates to a text file
-    with open(f"vina_box_of_{protein_files[0]}.txt", "w") as f:
+    with open(f"vina_box.txt", "w") as f:
         f.write(f'center_x = {center_x}\n')
         f.write(f'center_y = {center_y}\n')
         f.write(f'center_z = {center_z}\n')
         f.write(f'size_x = 20\n')
         f.write(f'size_y = 20\n')
         f.write(f'size_z = 20\n')
+
+    # change the working directory back to the current directory
+    os.chdir(CURRENT_DIR)
 
 
 if __name__ == "__main__":
