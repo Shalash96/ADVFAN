@@ -1,4 +1,5 @@
 import os
+import shutil
 
 # define the directory structure
 
@@ -16,7 +17,7 @@ import os
 """""
 
 
-def creatingFolders():
+def creatingFolders(new=False):
 
     dir_structure = {
         "INPUTS": ["Ligand", "Protein"],
@@ -37,3 +38,11 @@ def creatingFolders():
             if not os.path.exists(subdirectory_path):
                 # create the subdirectory if it doesn't exist
                 os.mkdir(subdirectory_path)
+            # if the new argument is passed and the subdirectory exists, delete its content
+            elif new:
+                shutil.rmtree(subdirectory_path)
+                os.mkdir(subdirectory_path)
+
+
+if __name__ == "__main__":
+    creatingFolders()

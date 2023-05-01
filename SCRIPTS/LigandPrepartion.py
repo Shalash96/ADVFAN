@@ -3,6 +3,9 @@ import subprocess
 
 # get the current path
 CURRENT_PATH = os.getcwd()
+PARENT_PATH = os.path.dirname(CURRENT_PATH)
+obabel_path = os.path.join(
+    CURRENT_PATH, 'ADFRsuite-1.0', 'bin', 'obabelbin', 'obabel')
 
 
 def ligandPreparation():

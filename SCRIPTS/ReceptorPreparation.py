@@ -5,6 +5,10 @@ import os
 
 # get the current path
 CURRENT_PATH = os.getcwd()
+# get one level up directory
+PARENT_PATH = os.path.dirname(CURRENT_PATH)
+obabel_path = os.path.join(
+    CURRENT_PATH, 'ADFRsuite-1.0', 'bin', 'obabelbin', 'obabel')
 
 
 def clean_pdb(input_dir, output_dir, filename, chain='A'):
@@ -17,12 +21,13 @@ def clean_pdb(input_dir, output_dir, filename, chain='A'):
     # Remove all all chains except A
     pymol.cmd.remove(f'not chain {chain}')
     # Save the file
-    output_file = os.path.join(output_dir, f"{filename[:-4]}_clean.pdb")
+    output_file = os.path.join(
+        output_dir, f"{filename[:-4]}_clean_chain_{chain}.pdb")
     pymol.cmd.save(output_file)
     return output_file
 
 
-def receptorPreparation():
+def receptorPreparation(chain='A'):
     # Check if the Ligand folder exists
     if not os.path.exists(os.path.join(CURRENT_PATH, 'INPUTS', 'Protein')):
 
@@ -44,16 +49,16 @@ def receptorPreparation():
                 if protein.endswith('.pdb'):
                     # run clean_pdb function to clean the protein and save it to the Protein_prepared folder
                     cleaned_pdb = clean_pdb(os.path.join(CURRENT_PATH, 'INPUTS', 'Protein'), os.path.join(
-                        CURRENT_PATH, 'OUTPUTS', 'Protein_prepared'), protein, chain='A')
+                        CURRENT_PATH, 'OUTPUTS', 'Protein_prepared'), protein, chain=chain)
 
                     # run obabel from the command line to add hydrogen to the protein
                     subprocess.run(
                         ['obabel', '-ipdb', cleaned_pdb, '-O', cleaned_pdb[:-4]+'_H.pdb', '-h'])
 
                     # run prepare_receptor.py (Autodock tools) from the command line to add charges to the protein
-                    subprocess.run([os.path.join(CURRENT_PATH, 'ADFRsuite-1.0', 'bin', 'prepare_receptor'),
+                    subprocess.run([os.path.join(PARENT_PATH, 'ADFRsuite-1.0', 'bin', 'prepare_receptor'),
                                    '-r', cleaned_pdb[:-4]+'_H.pdb', '-o', cleaned_pdb[:-4]+'_H_charged.pdbqt'])
 
 
 if __name__ == "__main__":
-    receptorPreparation()
+    receptorPreparation(chain='A')

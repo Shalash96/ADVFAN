@@ -2,15 +2,22 @@ import os
 import subprocess
 
 
-def dockingVina():
+def dockingVina(exhaustiveness='8', num_modes='9', energy_range='3'):
     # get the current path
     CURRENT_PATH = os.getcwd()
+    # get one level up from the current path
+    PARENT_PATH = os.path.dirname(CURRENT_PATH)
     # get the path of the vina executable
-    VINA_PATH = os.path.join(CURRENT_PATH, 'ADFRsuite-1.0', 'bin', 'vina')
+    VINA_PATH = os.path.join(PARENT_PATH, 'ADFRsuite-1.0', 'bin', 'vina')
 
     # get the path of the receptor from protein_prepared folder
     protein_files = [f for f in os.listdir(os.path.join(
         CURRENT_PATH, 'OUTPUTS', 'Protein_prepared')) if f.endswith('.pdbqt')]
+
+    # make sure that there is only one protein in the protein_prepared folder with the pdbqt extension
+    if len(protein_files) != 1:
+        raise Exception(
+            'Protein folder is empty or contains more than one protein. It should contain only one protein with the pdbqt extension')
 
     PROTEIN = os.path.join(CURRENT_PATH, 'OUTPUTS',
                            'Protein_prepared', protein_files[0])
@@ -29,15 +36,10 @@ def dockingVina():
         if ligand.endswith('.pdbqt'):
             ligand_path = os.path.join(LIGANDS_PATH, ligand)
             output_path = os.path.join(
-                CURRENT_PATH, 'OUTPUTS', 'Docking_results', f"{ligand[:-6]}_docked.pdbqt")
-            # subprocess.run([VINA_PATH, '--receptor', PROTEIN, '--ligand', ligand_path,
-            #                 '--config', VINA_BOX, '--out', output_path,
-            #                 '--exhaustiveness', '8', '--num_modes', '9', '--energy_range', '3'])
-            # write the docking results print on the terminal screen to a file
-            # print to the terminal screen that the docking is running
+                CURRENT_PATH, 'OUTPUTS', 'Docking_results', f"{ligand[:-6]}_poses.pdbqt")
             print(
                 f"Docking of {ligand[:-6]} to the {protein_files[0]} started. Please wait...")
-            with open(os.path.join(CURRENT_PATH, 'OUTPUTS', 'Docking_results', f"{ligand[:-6]}_docking_results.txt"), 'w') as f:
+            with open(os.path.join(CURRENT_PATH, 'OUTPUTS', 'Docking_results', f"{ligand[:-6]}_docking_summary.txt"), 'w') as f:
 
                 f.write("""\n\n
 ########################################################################################################################################################                
@@ -49,11 +51,11 @@ def dockingVina():
 
                 subprocess.run([VINA_PATH, '--receptor', PROTEIN, '--ligand', ligand_path,
                                 '--config', VINA_BOX, '--out', output_path,
-                                '--exhaustiveness', '8', '--num_modes', '9', '--energy_range', '3'], stdout=f)
-            # print to the terminal screen that the docking is finished
+                                '--exhaustiveness', exhaustiveness, '--num_modes', num_modes, '--energy_range', energy_range], stdout=f)
+
             print(
                 f"Docking of {ligand} to the {protein_files[0]} finished.")
 
 
 if __name__ == "__main__":
-    dockingVina()
+    dockingVina(exhaustiveness='8', num_modes='9', energy_range='3')
