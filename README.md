@@ -8,15 +8,15 @@ ADVFAN helps you to run single docking/virtual screening with just one command l
 
 1. Folders creation step
    It starts with creating the folders, where the user will add ligand(s) and protein, and folders, where the prepared ligand(s) and protein and docking results will be saved.
-   `
+```
    ├── INPUTS ====> Where the user will put the ligand and protein files
    │ ├── Ligand ====> Where the user will put the ligand files(.sdf)
    │ └── Protein ====> Where the user will put the protein files(.pdb)
    ├── OUTPUTS ====> Where the output files will be saved
    │ ├── Ligand_prepared ====> Where the prepared ligand files will be saved(.pdbqt)
    │ └── Protein_prepared ====> Where the prepared protein files will be saved(.pdbqt)
-
-`2. Ligand preparation step
+```
+2. Ligand preparation step
 It read the ligand(s) file you put in`INPUTS/Ligand`directory and add hydrogen and partial charge to it using open babel. The new file will be saved in *.pdbqt* format in`OUTPUTS/Ligand_prepared`**NOTE** Ligand files must be in *.sdf* format 
 3. Protein preparation step
 It read the protein file you put in`INPUTS/Protein`directory and save the output files in`OUTPUTS/Protein_prepared`after performing the follwing steps:
