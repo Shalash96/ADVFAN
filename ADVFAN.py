@@ -28,6 +28,11 @@ if __name__ == "__main__":
     parser.add_argument('--new', action='store_true', default=False,
                         help='Delete the input files abd their docking results and start afresh')
 
+    parser.add_argument('--size', type=int, nargs='+',
+                        help='Size of the vina box')
+    parser.add_argument('--center', type=int, nargs='+',
+                        help='xyz coordinations of the grid center')
+
     args = parser.parse_args()
 
     if args.new:
@@ -38,7 +43,7 @@ if __name__ == "__main__":
         creatingFolders()
         ligandPreparation()
         receptorPreparation(args.chain)
-        vinaBoxCreation()
+        vinaBoxCreation(size=args.size, center=args.center)
 
         # print to the terminal screen the deafult values of the docking parameters if the user didn't specify them
         # or the values that the user specified
