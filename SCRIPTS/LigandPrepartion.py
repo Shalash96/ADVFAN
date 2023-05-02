@@ -1,11 +1,10 @@
 import os
 import subprocess
+from SCRIPTS.paths import obabel_PATH
 
 # get the current path
 CURRENT_PATH = os.getcwd()
 PARENT_PATH = os.path.dirname(CURRENT_PATH)
-obabel_path = os.path.join(
-    CURRENT_PATH, 'ADFRsuite-1.0', 'bin', 'obabelbin', 'obabel')
 
 
 def ligandPreparation():
@@ -33,9 +32,10 @@ def ligandPreparation():
                     # get path for the output file
                     output_path = os.path.join(
                         CURRENT_PATH, 'OUTPUTS', 'Ligand_prepared', f"{ligand[:-4]}_H_charged.pdbqt")
+
                     # run obabel from the command line to add hydrogen and charge to the ligand
                     subprocess.run(
-                        ['obabel', '-isdf', ligand_path, '-O', output_path, '-h', '-p', '-r'])
+                        [obabel_PATH, '-isdf', ligand_path, '-O', output_path, '-h', '-p', 'r'])
 
 
 if __name__ == "__main__":

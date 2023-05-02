@@ -1,14 +1,11 @@
 import os
 import subprocess
+from SCRIPTS.paths import VINA_PATH
 
 
 def dockingVina(exhaustiveness='8', num_modes='9', energy_range='3'):
     # get the current path
     CURRENT_PATH = os.getcwd()
-    # get one level up from the current path
-    PARENT_PATH = os.path.dirname(CURRENT_PATH)
-    # get the path of the vina executable
-    VINA_PATH = os.path.join(PARENT_PATH, 'ADFRsuite-1.0', 'bin', 'vina')
 
     # get the path of the receptor from protein_prepared folder
     protein_files = [f for f in os.listdir(os.path.join(

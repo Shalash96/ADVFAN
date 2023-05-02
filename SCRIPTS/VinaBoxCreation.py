@@ -1,7 +1,7 @@
 import re
 import os
 import subprocess
-
+from SCRIPTS.paths import ADFRsuite_PATH
 CURRENT_DIR = os.getcwd()
 
 
@@ -30,7 +30,7 @@ def vinaBoxCreation():
     os.chdir(os.path.join(CURRENT_DIR, 'OUTPUTS', 'Protein_prepared'))
 
     # Run prepare_gpf.py script to generate the .gpf file
-    subprocess.run(['pythonsh', f'{CURRENT_DIR}/SCRIPTS/prepare_gpf.py', '-r', protein_path, '-l',
+    subprocess.run([os.path.join(ADFRsuite_PATH, 'bin', 'pythonsh'), f'{CURRENT_DIR}/SCRIPTS/prepare_gpf.py', '-r', protein_path, '-l',
                    ligand_path, '-o', f'{CURRENT_DIR}/OUTPUTS/vina_box/{protein_files[0][:-6]}.gpf', '-y'])
 
     # change the working directory to the vina_box folder
@@ -64,6 +64,15 @@ def vinaBoxCreation():
 
     # change the working directory back to the current directory
     os.chdir(CURRENT_DIR)
+
+    # print vina box creation success message with xyz coordinates and bix size
+    print(f"\nVina box created successfully with the following parameters:\n"
+          f"center_x = {center_x}\n"
+          f"center_y = {center_y}\n"
+          f"center_z = {center_z}\n"
+          f"size_x = 20\n"
+          f"size_y = 20\n"
+          f"size_z = 20\n")
 
 
 if __name__ == "__main__":

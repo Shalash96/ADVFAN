@@ -1,14 +1,12 @@
 import pymol
 import subprocess
 import os
-
+from SCRIPTS.paths import ADFRsuite_PATH, obabel_PATH
 
 # get the current path
 CURRENT_PATH = os.getcwd()
 # get one level up directory
 PARENT_PATH = os.path.dirname(CURRENT_PATH)
-obabel_path = os.path.join(
-    CURRENT_PATH, 'ADFRsuite-1.0', 'bin', 'obabelbin', 'obabel')
 
 
 def clean_pdb(input_dir, output_dir, filename, chain='A'):
@@ -53,10 +51,10 @@ def receptorPreparation(chain='A'):
 
                     # run obabel from the command line to add hydrogen to the protein
                     subprocess.run(
-                        ['obabel', '-ipdb', cleaned_pdb, '-O', cleaned_pdb[:-4]+'_H.pdb', '-h'])
+                        [obabel_PATH, '-ipdb', cleaned_pdb, '-O', cleaned_pdb[:-4]+'_H.pdb', '--addhydrogens'])
 
                     # run prepare_receptor.py (Autodock tools) from the command line to add charges to the protein
-                    subprocess.run([os.path.join(PARENT_PATH, 'ADFRsuite-1.0', 'bin', 'prepare_receptor'),
+                    subprocess.run([os.path.join(ADFRsuite_PATH, 'bin', 'prepare_receptor'),
                                    '-r', cleaned_pdb[:-4]+'_H.pdb', '-o', cleaned_pdb[:-4]+'_H_charged.pdbqt'])
 
 
