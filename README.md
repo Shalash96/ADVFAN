@@ -43,6 +43,8 @@ To use ADVFAN, you have to make sure that you install **AutoDock Vina**, **Open 
 After installing them add the paths of open babel, vin, and ADFRsuite to the `SCRIPTS/paths.py` file, a preview content of the file is shown below. If you installed them in your `~` directory the following paths should work fine with you and no need to change them.
 
 ```
+import os
+
 VINA_PATH = os.path.join(os.path.expanduser(
     '~'), 'vina_1.2.3_linux_x86_64')
 
