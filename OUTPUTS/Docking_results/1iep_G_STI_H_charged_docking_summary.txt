@@ -20,15 +20,37 @@ AutoDock Vina v1.2.3
 Scoring function : vina
 Rigid receptor: /home/bawazir/shalash/docking/ADVFN/OUTPUTS/Protein_prepared/1iep_clean_chain_A_H_charged.pdbqt
 Ligand: /home/bawazir/shalash/docking/ADVFN/OUTPUTS/Ligand_prepared/1iep_G_STI_H_charged.pdbqt
-Grid center: X 13 Y 50 Z 18
-Grid size  : X 30 Y 30 Z 30
+Grid center: X 15.714 Y 53.057 Z 15.644
+Grid size  : X 20 Y 20 Z 20
 Grid space : 0.375
 Exhaustiveness: 8
 CPU: 0
 Verbosity: 1
 
 Computing Vina grid ... done.
-Performing docking (random seed: 1998425951) ... 
+Performing docking (random seed: -684206680) ... 
 0%   10   20   30   40   50   60   70   80   90   100%
 |----|----|----|----|----|----|----|----|----|----|
-****************************************
+***************************************************
+
+mode |   affinity | dist from best mode
+     | (kcal/mol) | rmsd l.b.| rmsd u.b.
+-----+------------+----------+----------
+   1       -11.25          0          0
+   2       -10.76      1.685       13.8
+   3       -10.44      1.815      13.47
+   4       -10.35      2.891      13.64
+   5       -9.257      3.842      6.705
+   6       -8.803      3.178      6.495
+   7        -6.13      7.455      14.11
+   8       -5.838      4.233      6.224
+   9       -5.771      3.896      6.187
+
+
+
+########################################################################################################################################################                
+#               This docking process was run through AutoDock Vina For Absolute Noobs scripts'ADVFAN'                                                  #
+#               These scripts are a wrapper for AutoDock Vina, AutoDock Tools and openbabel to simplify the docking process for beginners.             #
+#               They are written by: Mahmoud Shalash ===>  https://twitter.com/__shalash__                                                             #
+#               The code is available on my GitHub:  ===>  https://github.com/Shalash96                                                                #
+########################################################################################################################################################

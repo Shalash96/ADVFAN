@@ -17,21 +17,23 @@ if __name__ == "__main__":
             The script will create the OUTPUTS folder and save the results of the docking in it. \
             ')
     parser.add_argument('-c', '--chain', type=str.capitalize, default='A',
-                        help='Chain name of the protein to keep')
+                        help='Chain name of the protein to keep', metavar='')
     parser.add_argument('-e', '--exhaustiveness', type=str, default='8',
-                        help='Exhaustiveness of the docking')
+                        help='Exhaustiveness of the docking', metavar='')
     parser.add_argument('-nm', '--num_modes', type=str, default='9',
-                        help='Number of docking modes')
+                        help='Number of docking modes', metavar='')
     parser.add_argument('-er', '--energy_range', type=str, default='3',
-                        help='Energy range of the docking')
+                        help='The maximum energy difference allowed between the best binding mode and the worst binding mode', metavar='')
 
     parser.add_argument('--new', action='store_true', default=False,
                         help='Delete the input files abd their docking results and start afresh')
 
     parser.add_argument('--size', type=int, nargs='+',
-                        help='Size of the vina box')
+                        help='Size of the vina box. The default is 20 20 20. If you want to change it, \
+                            input should be in the form of x y z. Only separate by one space not comma', metavar='')
     parser.add_argument('--center', type=int, nargs='+',
-                        help='xyz coordinations of the grid center')
+                        help='xyz coordinations of the grid center. The default is auto calaculated by Vina. \
+                        If you want to change it, input should be in the form of x y z. Only separate by one space not comma', metavar='')
 
     args = parser.parse_args()
 
