@@ -2,7 +2,7 @@
 
 ## What is ADVFAN?
 
-ADVFAN helps you to run single docking/virtual screening with just one command line code. It is a group of python scripts that use Autodock vina, ADFRsuite, and open babel to perform the docking process wthout knowing to much about how too use these software
+ADVFAN helps you to run single docking/virtual screening with just one command line code. It is a python wrapper for Autodock vina, ADFRsuite, and open babel to perform the docking process wthout knowing to much about how too use these software
 
 ## How it works?
 
