@@ -26,7 +26,7 @@ if __name__ == "__main__":
                         help='The maximum energy difference allowed between the best binding mode and the worst binding mode', metavar='')
 
     parser.add_argument('--new', action='store_true', default=False,
-                        help='Delete the input files and their docking results and start afresh')
+                        help='Start afresh new docking. CAUTION if you run this after docking, it will delete the input files and their docking results')
 
     parser.add_argument('--size', type=int, nargs='+',
                         help='Size of the vina box. The default is 20 20 20. If you want to change it, \
